@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 import * as moment from 'moment';
 
@@ -18,8 +19,108 @@ export class HelperService {
   };
 
   constructor(
+    public nativeStorage:NativeStorage,
   	public router:Router
   ) { }
+
+  _createSession(result) {
+    if(result.token != undefined){
+      localStorage.setItem('authToken',result.token);
+      this._user.authToken=String(result.token);
+    }
+    
+    this._user.id_users  = result.user_id;
+    this._user.id_role   = result.role_id;
+    this._user.id_vendor = result.vendor_id;
+    this._user.data      = result;
+    
+    return this._createStorage("sessionIronman", this._user);
+  }
+
+  _destroySession(){
+    return new Promise((resolve, reject) => {
+      this.nativeStorage
+        .clear()
+        .then(data => {
+          this._user={
+            authToken:"",
+            id_users:"",
+            id_role:"",
+            id_vendor:"",
+            data:{},
+          };
+              
+          localStorage.clear();
+          resolve(true);  
+
+        }, error => {
+          reject(error)  
+        });
+
+    });
+  }
+
+  _createStorage(mystorage,myparam){
+    let myNparam=window.btoa(JSON.stringify(myparam));
+    myNparam=window.btoa(window.btoa(mystorage)+"_"+myNparam);
+
+    return new Promise((resolve, reject) => {
+      this.nativeStorage.setItem(mystorage, myNparam)
+      .then(
+        () =>resolve(true),
+        error => reject(error)
+      );
+    });
+  }
+
+  _getAllUserInfo(storage){
+    return new Promise((resolve, reject) => {
+      this.nativeStorage.getItem(storage)
+      .then(
+        data => {
+          let decData=window.atob(data);
+          let repDatastr=decData.replace(window.btoa(storage)+"_", "");
+          decData=window.atob(repDatastr);
+          let realData=JSON.parse(decData);
+          this._setUser(realData);
+          resolve(realData);
+        },      
+        error => {
+          reject(error)
+        }
+      );  
+    });
+  }
+
+  _setUser(result){
+    if(result.authToken!=undefined) this._user.authToken=result.authToken;
+    if(result.user_id!=undefined) this._user.id_users=result.id_users;
+    if(result.vendor_id!=undefined) this._user.id_vendor=result.vendor_id;
+    if(result.role_id!=undefined) this._user.id_role=result.role_id;
+    if(result.data!=undefined) this._user.data=result.data;
+   
+   //console.log('myData User 12',this._user);
+  }
+
+  _isLoggedIn(){
+    if(this._user.id_users!=undefined && this._user.id_users!='' && this._user.id_users!=null) return true;
+    else false;    
+  }
+
+  _updateDataUser(sessionName,data){
+     let newData=this._user;
+
+     if(sessionName=='authToken') newData.authToken=data;
+     else if(sessionName=='user_id') newData.id_users=data;
+     else if(sessionName=='vendor_id') newData.id_vendor=data;
+     else if(sessionName=='role_id') newData.id_role=data;  
+     else if(sessionName=='data') newData.data=data;
+     else {
+
+     }
+
+     this._createStorage("sessionIronman",newData);
+  }
 
   _generateID(length) {
     let result = '';
