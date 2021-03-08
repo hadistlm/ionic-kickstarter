@@ -52,6 +52,8 @@ export class ConnectionService {
 
         // device is webapp
         }else{
+          let httpParams = new HttpParams({ fromObject: data });
+
         	this.baseHTTP.get(this.url + '/' + endpoint, {params: data, headers: this.headers}).subscribe((response) => {
 	          resolve(response);
 	        }, (error) => {
@@ -83,7 +85,9 @@ export class ConnectionService {
 
         // device is webapp
         }else{
-        	this.baseHTTP.post(this.url + '/' + endpoint, {params: body, headers: this.headers}).subscribe((response) => {
+          let httpParams = new HttpParams({ fromObject: body });
+
+        	this.baseHTTP.post(this.url + '/' + endpoint, httpParams, {headers: this.headers}).subscribe((response) => {
 	          resolve(response);
 	        }, (error) => {
 	          this.setTokenExpired(error);	

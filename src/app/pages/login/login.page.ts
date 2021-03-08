@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AuthServiceService } from 'src/app/api/auth-service.service';
 
 @Component({
   selector: 'app-login',
@@ -7,7 +8,6 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class LoginPage implements OnInit {
 	@Input() data: any;
-  @Input() events: any;
 
   public username: string;
   public password: string;
@@ -15,7 +15,9 @@ export class LoginPage implements OnInit {
   public isUsernameValid: boolean;
   public isPasswordValid: boolean;
   
-  constructor() { 
+  constructor(
+    private authModule : AuthServiceService
+  ) { 
     this.isUsernameValid= true;
     this.isPasswordValid = true;
   }
@@ -39,14 +41,18 @@ export class LoginPage implements OnInit {
 
   onEvent(event: string){
     if (event == "onLogin" && !this.validate()) {
-        return ;
+        return;
     }
-    if (this.events[event]) {
-        this.events[event]({
-            'username': this.username,
-            'password': this.password
+
+    switch (event) {
+      case "onLogin":
+      default:
+        return this.authModule.login({
+          username: this.username,
+          password: this.password
         });
-    }        
+      break;
+    } 
   }
 
   validate(){

@@ -194,6 +194,17 @@ export class HelperService {
     return false;
   }
 
+  setZero(number){
+    return (number < 10 ? '0' : '') + number;
+  }
+
+  hours(date){
+    var hours = date.getHours();
+    if(hours > 12)
+        return hours - 12; // Substract 12 hours when 13:00 and more
+    return hours;
+  }
+
   am_pm(date){
     if(date.getHours()==0 && date.getMinutes()==0 && date.getSeconds()==0)
       return ''; // No AM for MidNight
