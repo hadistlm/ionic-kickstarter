@@ -90,67 +90,71 @@
           .item-block {
             overflow: visible !important;
           }
-        }
 
-        ion-item {
-          background-color: transparent !important;
+          ion-item {
+            background-color: transparent !important;
 
-          ion-label {
-            position: absolute;
-            right: 0;
-            bottom: 0;
-            color: $settings-text-label-color !important;
-            font-size: $settings-font-size-label;
-            font-weight: $settings-font-weight-label;
-            line-height: 17px;
-            margin-right: 10px;
-          }
+            ion-label {
+              position: absolute;
+              right: 0;
+              bottom: 0;
+              color: $settings-text-label-color !important;
+              font-size: $settings-font-size-label;
+              font-weight: $settings-font-weight-label;
+              line-height: 17px;
+              margin-right: 10px;
+            }
 
-          .item-inner {
-            display: block !important;
-            overflow: visible !important;
-            border-bottom: 1px solid #CCCCCC !important;
-            box-shadow: none !important;
-          }
+            ion-buttons{
+              color: #aaa;
+            }
 
-          /* Settings text-input
-          ===============================*/
-          .text-input {
-            color: $settings-text-input-color;
-            font-size: $settings-font-size-input-field;
-            font-weight: $settings-font-weight-input-field;
-            width: 100% !important;
-            margin: 19px 20px;
-          }
+            .item-inner {
+              display: block !important;
+              overflow: visible !important;
+              border-bottom: 1px solid #CCCCCC !important;
+              box-shadow: none !important;
+            }
 
-          /* Settings input-placeholder
-          ===============================*/
-          ::-webkit-input-placeholder {
-            /* Chrome/Opera/Safari */
-            color: $settings-text-input-placeholder !important;
-            font-size: $settings-font-size-input-placeholder !important;
-            font-weight: $settings-font-weight-input-placeholder !important;
-          }
+            /* Settings text-input
+            ===============================*/
+            .text-input {
+              color: $settings-text-input-color;
+              font-size: $settings-font-size-input-field;
+              font-weight: $settings-font-weight-input-field;
+              width: 100% !important;
+              margin: 19px 20px;
+            }
 
-          ::-moz-placeholder {
-            /* Firefox 19+ */
-            color: $settings-text-input-placeholder !important;
-            font-size: $settings-font-size-input-placeholder !important;
-            font-weight: $settings-font-weight-input-placeholder !important;
-          }
+            /* Settings input-placeholder
+            ===============================*/
+            ::-webkit-input-placeholder {
+              /* Chrome/Opera/Safari */
+              color: $settings-text-input-placeholder !important;
+              font-size: $settings-font-size-input-placeholder !important;
+              font-weight: $settings-font-weight-input-placeholder !important;
+            }
 
-          :-ms-input-placeholder {
-            /* IE 10+ */
-            color: $settings-text-input-placeholder !important;
-            font-size: $settings-font-size-input-placeholder !important;
-            font-weight: $settings-font-weight-input-placeholder !important;
-          }
+            ::-moz-placeholder {
+              /* Firefox 19+ */
+              color: $settings-text-input-placeholder !important;
+              font-size: $settings-font-size-input-placeholder !important;
+              font-weight: $settings-font-weight-input-placeholder !important;
+            }
 
-          :-moz-placeholder {
-            /* Firefox 18- */
-            color: $settings-text-input-placeholder !important;
-            font-size: $settings-font-size-input-placeholder !important;
-            font-weight: $settings-font-weight-input-placeholder !important;
+            :-ms-input-placeholder {
+              /* IE 10+ */
+              color: $settings-text-input-placeholder !important;
+              font-size: $settings-font-size-input-placeholder !important;
+              font-weight: $settings-font-weight-input-placeholder !important;
+            }
+
+            :-moz-placeholder {
+              /* Firefox 18- */
+              color: $settings-text-input-placeholder !important;
+              font-size: $settings-font-size-input-placeholder !important;
+              font-weight: $settings-font-weight-input-placeholder !important;
+            }
           }
         }
 

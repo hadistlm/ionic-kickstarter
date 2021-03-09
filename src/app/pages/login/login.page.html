@@ -26,8 +26,11 @@
 	            </ion-item>
 	            <!-- Input-field-password -->
 	            <ion-item>
-	              <ion-input type="password" [placeholder]="data.txtPassword" [(ngModel)]="password" [ngModelOptions]="{standalone: true}"></ion-input>
+	              <ion-input type="{{ passwordType }}" [placeholder]="data.txtPassword" [(ngModel)]="password" [ngModelOptions]="{standalone: true}"></ion-input>
 	              <ion-label class="ion-no-margin" *ngIf="!isPasswordValid">{{data.errorPassword}}</ion-label>
+	              <ion-buttons slot="end">
+					  <ion-button fill="clear" type="button" (click)="showPassword()" class="btn-show" icon-only><ion-icon name="{{ passwordIcon }}"></ion-icon></ion-button>
+				  </ion-buttons>
 	            </ion-item>
 	          </div>
 	          <!-- Login button -->

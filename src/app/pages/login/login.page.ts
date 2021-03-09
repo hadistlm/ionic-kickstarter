@@ -14,6 +14,9 @@ export class LoginPage implements OnInit {
 
   public isUsernameValid: boolean;
   public isPasswordValid: boolean;
+
+  public passwordType: string = "password";
+  public passwordIcon: string = "eye-off";
   
   constructor(
     private authModule : AuthServiceService
@@ -38,6 +41,13 @@ export class LoginPage implements OnInit {
       "errorPassword" : "Field can't be empty."
     }
 	}
+
+  showPassword(){
+    // change password input type
+    this.passwordType = (this.passwordType=="password") ? "text" : "password";
+    // change password icon
+    this.passwordIcon = (this.passwordIcon=="eye-off") ? "eye" : "eye-off";
+  }
 
   onEvent(event: string){
     if (event == "onLogin" && !this.validate()) {
